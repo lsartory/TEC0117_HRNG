@@ -4,7 +4,7 @@ use ieee.numeric_std.all;
 
 --------------------------------------------------
 
-entity HRNG is
+entity TEC0117_HRNG is
 	port (
 		CLK_100MHz : in  std_logic;
         CLRn       : in  std_logic;
@@ -14,7 +14,7 @@ end entity;
 
 --------------------------------------------------
 
-architecture HRNG_arch of HRNG is
+architecture TEC0117_HRNG_arch of TEC0117_HRNG is
     signal clock_divider : unsigned(23 downto 0) := (others => '0');
     signal led_output    : unsigned( 7 downto 0) := (others => '0');
 begin
@@ -36,4 +36,4 @@ begin
 	end process;
     LED <= std_logic_vector(led_output);
 
-end HRNG_arch;
+end TEC0117_HRNG_arch;
