@@ -31,16 +31,19 @@ architecture TEC0117_HRNG_arch of TEC0117_HRNG is
 
     signal tx_start : std_logic := '0';
     signal tx_busy  : std_logic := '0';
+
+    signal rx_data : std_logic_vector(7 downto 0) := (others => '0');
+    signal rx_done : std_logic := '0';
 begin
 
-    main_pll: entity work.MainPLL
+    main_pll : entity work.MainPLL
         port map (
             clkout => pll_clk,
             clkin  => CLK_100MHz
         );
     clrn <= USER_BTN;
 
-    tx_clk_gen: entity work.ClockScaler
+    tx_clk_gen : entity work.ClockScaler
         generic map (
             INPUT_FREQUENCY  => 100.000000,
             OUTPUT_FREQUENCY =>   0.000002
@@ -51,7 +54,7 @@ begin
             OUTPUT_PULSE => tx_start
         );
 
-    uart: entity work.UART
+    uart : entity work.UART
         generic map (
             INPUT_FREQUENCY => 100.000000,
             BAUD_RATE       =>     115200
@@ -65,16 +68,21 @@ begin
 
             TX_DATA  => x"30",
             TX_START => tx_start,
-            TX_BUSY  => tx_busy
+            TX_BUSY  => tx_busy,
+
+            RX_DATA  => rx_data,
+            RX_DONE  => rx_done
         );
 
     process (pll_clk)
         variable x : std_logic := '0';
     begin
         if rising_edge(pll_clk) then
-            if tx_start = '1' then
-                x := not x;
-                LED <= (others => x);
+            if rx_done = '1' then
+                LED <= rx_data;
+            --elsif tx_start = '1' then
+            --    x := not x;
+            --    LED <= (others => x);
             end if;
         end if;
     end process;

@@ -9,6 +9,7 @@
         <File path="src/MainPLL.vhd" type="file.vhdl" enable="1"/>
         <File path="src/TEC0117_HRNG.vhd" type="file.vhdl" enable="1"/>
         <File path="src/UART.vhd" type="file.vhdl" enable="1"/>
+        <File path="src/VectorCDC.vhd" type="file.vhdl" enable="1"/>
         <File path="src/TEC0117_HRNG.cst" type="file.cst" enable="1"/>
         <File path="src/TEC0117_HRNG.sdc" type="file.sdc" enable="1"/>
         <File path="src/TEC0117_HRNG.gpa" type="file.gpa" enable="1"/>
