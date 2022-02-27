@@ -5,8 +5,10 @@
     <Version>5</Version>
     <Device name="GW1NR-9" pn="GW1NR-LV9QN88PC6/I5">gw1nr9-012</Device>
     <FileList>
-        <File path="src/Main_PLL.vhd" type="file.vhdl" enable="1"/>
+        <File path="src/ClockScaler.vhd" type="file.vhdl" enable="1"/>
+        <File path="src/MainPLL.vhd" type="file.vhdl" enable="1"/>
         <File path="src/TEC0117_HRNG.vhd" type="file.vhdl" enable="1"/>
+        <File path="src/UART.vhd" type="file.vhdl" enable="1"/>
         <File path="src/TEC0117_HRNG.cst" type="file.cst" enable="1"/>
         <File path="src/TEC0117_HRNG.sdc" type="file.sdc" enable="1"/>
         <File path="src/TEC0117_HRNG.gpa" type="file.gpa" enable="1"/>

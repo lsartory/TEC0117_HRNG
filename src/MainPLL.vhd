@@ -9,14 +9,14 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
 
-entity Main_PLL is
+entity MainPLL is
     port (
         clkout: out std_logic;
         clkin: in std_logic
     );
-end Main_PLL;
+end MainPLL;
 
-architecture Behavioral of Main_PLL is
+architecture Behavioral of MainPLL is
 
     signal lock_o: std_logic;
     signal clkoutp_o: std_logic;
@@ -128,4 +128,4 @@ begin
             FDLY => FDLY_i
         );
 
-end Behavioral; --Main_PLL
+end Behavioral; --MainPLL

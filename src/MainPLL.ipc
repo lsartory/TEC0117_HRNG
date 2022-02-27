@@ -1,7 +1,7 @@
 [General]
 ipc_version=4
-file=Main_PLL
-module=Main_PLL
+file=MainPLL
+module=MainPLL
 target_device=gw1nr9-012
 type=clock_rpll
 version=1.0

@@ -4,8 +4,8 @@
 -part_number GW1NR-LV9QN88PC6/I5
 
 
--mod_name Main_PLL
--file_name Main_PLL
+-mod_name MainPLL
+-file_name MainPLL
 -path /home/zap/Projects/TEC0117_HRNG/src/
 -type PLL
 -rPll true
