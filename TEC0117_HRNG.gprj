@@ -3,7 +3,7 @@
 <Project>
     <Template>FPGA</Template>
     <Version>5</Version>
-    <Device name="GW1NR-9" pn="GW1NR-LV9QN88PC6/I5">gw1nr9-012</Device>
+    <Device name="GW1NR-9" pn="GW1NR-LV9QN88C6/I5">gw1nr9-000</Device>
     <FileList>
         <File path="src/ClockScaler.vhd" type="file.vhdl" enable="1"/>
         <File path="src/MainPLL.vhd" type="file.vhdl" enable="1"/>
