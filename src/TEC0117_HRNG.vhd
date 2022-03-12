@@ -8,7 +8,6 @@
 
 library ieee;
 use ieee.std_logic_1164.all;
-use ieee.numeric_std.all;
 
 --------------------------------------------------
 
@@ -29,11 +28,14 @@ architecture TEC0117_HRNG_arch of TEC0117_HRNG is
     signal pll_clk : std_logic := '0';
     signal clrn    : std_logic := '1';
 
-    signal tx_start : std_logic := '0';
-    signal tx_busy  : std_logic := '0';
+    signal rng_data  : std_logic_vector(7 downto 0) := (others => '0');
+    signal rng_valid : std_logic := '0';
 
     signal rx_data : std_logic_vector(7 downto 0) := (others => '0');
     signal rx_done : std_logic := '0';
+
+    signal display_pulse : std_logic := '0';
+    signal display_data  : std_logic_vector(7 downto 0) := (others => '0');
 begin
 
     main_pll : entity work.MainPLL
@@ -43,21 +45,24 @@ begin
         );
     clrn <= USER_BTN;
 
-    tx_clk_gen : entity work.ClockScaler
-        generic map (
-            INPUT_FREQUENCY  => 100.000000,
-            OUTPUT_FREQUENCY =>   0.000002
-        )
-        port map (
-            INPUT_CLK    => pll_clk,
-            CLRn         => clrn,
-            OUTPUT_PULSE => tx_start
-        );
+    rng : entity work.neoTRNG
+      generic map (
+        NUM_CELLS     => 32,
+        NUM_INV_START => 3,
+        NUM_INV_INC   => 2,
+        NUM_INV_DELAY => 2
+      )
+      port map (
+        clk_i    => pll_clk,
+        enable_i => clrn,
+        data_o   => rng_data,
+        valid_o  => rng_valid
+      );
 
     uart : entity work.UART
         generic map (
             INPUT_FREQUENCY => 100.000000,
-            BAUD_RATE       =>     115200
+            BAUD_RATE       =>    1000000
         )
         port map (
             CLK      => pll_clk,
@@ -66,23 +71,35 @@ begin
             UART_RX  => UART_RX,
             UART_TX  => UART_TX,
 
-            TX_DATA  => x"30",
-            TX_START => tx_start,
-            TX_BUSY  => tx_busy,
+            TX_DATA  => rng_data,
+            TX_START => rng_valid,
+--          TX_BUSY  => tx_busy,
 
             RX_DATA  => rx_data,
             RX_DONE  => rx_done
         );
 
+    display_clk : entity work.ClockScaler
+        generic map (
+            INPUT_FREQUENCY  => 100.000000,
+            OUTPUT_FREQUENCY =>   0.000010
+        )
+        port map (
+            INPUT_CLK    => pll_clk,
+            CLRn         => clrn,
+            OUTPUT_PULSE => display_pulse
+        );
+
     process (pll_clk)
-        variable x : std_logic := '0';
     begin
         if rising_edge(pll_clk) then
+            if rng_valid = '1' then
+                display_data <= rng_data;
+            end if;
             if rx_done = '1' then
                 LED <= rx_data;
-            --elsif tx_start = '1' then
-            --    x := not x;
-            --    LED <= (others => x);
+            elsif display_pulse = '1' then
+                LED <= display_data;
             end if;
         end if;
     end process;

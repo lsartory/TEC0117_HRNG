@@ -71,11 +71,12 @@ begin
             TX_BUSY <= '1';
             case tx_state is
                 when idle =>
-                    TX_BUSY <= '0';
                     UART_TX <= '1';
                     if TX_START = '1' then
                         tx_shift_reg <= '1' & TX_DATA & '0';
                         tx_state     <= sending;
+                    else
+                        TX_BUSY <= '0';
                     end if;
 
                 when sending =>
