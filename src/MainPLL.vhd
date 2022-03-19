@@ -4,7 +4,7 @@
 --GOWIN Version: V1.9.8.03
 --Part Number: GW1NR-LV9QN88PC6/I5
 --Device: GW1NR-9
---Created Time: Mon Feb 21 21:40:50 2022
+--Created Time: Sat Mar 19 16:25:54 2022
 
 library IEEE;
 use IEEE.std_logic_1164.all;
@@ -90,11 +90,11 @@ begin
             FCLKIN => "100",
             DEVICE => "GW1NR-9",
             DYN_IDIV_SEL => "false",
-            IDIV_SEL => 0,
+            IDIV_SEL => 4,
             DYN_FBDIV_SEL => "false",
-            FBDIV_SEL => 0,
+            FBDIV_SEL => 1,
             DYN_ODIV_SEL => "false",
-            ODIV_SEL => 8,
+            ODIV_SEL => 16,
             PSDA_SEL => "0000",
             DYN_DA_EN => "true",
             DUTYDA_SEL => "1000",
