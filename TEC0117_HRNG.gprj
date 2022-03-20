@@ -7,6 +7,7 @@
     <FileList>
         <File path="src/ClockScaler.vhd" type="file.vhdl" enable="1"/>
         <File path="src/MainPLL.vhd" type="file.vhdl" enable="1"/>
+        <File path="src/PulseDensityModulator.vhd" type="file.vhdl" enable="1"/>
         <File path="src/SHA256.vhd" type="file.vhdl" enable="1"/>
         <File path="src/TEC0117_HRNG.vhd" type="file.vhdl" enable="1"/>
         <File path="src/UART.vhd" type="file.vhdl" enable="1"/>
